@@ -4,9 +4,7 @@ const router = express.Router()
 
 router.get('/', (req, res) => {
   console.log('home.js connected!')
-  res.render('index',)
+  res.render('index')
 })
 
 module.exports = router
-
-// { Surfers: Surfers.surfers }

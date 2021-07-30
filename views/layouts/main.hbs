@@ -4,21 +4,173 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script type="text/javascript" src="home.js"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
+
 <body>
-  <header>
-    {{{ body }}}
-  </header>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
-    integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+        let videoList = $("#videoList");
+        let apiKey = "AIzaSyDKgWsW4iRmu-U5nGrm_Ch82KinAtF3wbk";
+        let player = $("#player");
+        const surfers = ['Harley Ingleby', 'Kai Sallas', 'Taka Inoue', 'Edouard Delpero', 'Phil Rajzman']
+        let searchTerm = surfers[0];
+
+        const surferInfo = [
+          {
+            name: "Harley Ingleby",
+            img: "https://i.ytimg.com/vi/Ipxawd4NcvM/maxresdefault.jpg",
+            description: "哈利·英格爾比是澳大利亞職業長板衝浪者。英格比（Ingleby）在2005年ASP世界巡迴賽的第一年就獲得了第五名。2008年，他在法國安格雷贏得故道世遊賽在整體點完成的第3。他於2009年贏得了首個Asp世界長板錦標賽冠軍，並於2014年在中國海南島奪回了冠軍。"
+          },
+          {
+            name: "Kai Sallas",
+            img: "https://scontent-hkt1-1.xx.fbcdn.net/v/t1.6435-9/98018340_265900604793184_187166050465349632_n.jpg?_nc_cat=108&ccb=1-3&_nc_sid=9267fe&_nc_ohc=vygDjgsosDkAX8QcL5e&_nc_ht=scontent-hkt1-1.xx&oh=ff4b39a0006cc38cca162d353f111a71&oe=6126EAEC",
+            description:"凱·薩拉斯出生並成長於夏威夷威基基市，在10歲時(1960)第一次嘗試衝浪，12歲時開始參賽並世界巡迴衝浪，目前擁有兩次世界長板衝浪第二名的戰績以及一間衝浪教學店\"Pro Surf School Hawaii\""
+          },
+          {
+            name: "Taka Inoue",
+            img: "https://www.namidensetsu.com/news/wp-content/uploads/sites/2/2019/08/676a9a95b2d23de1518da743bc76f9f9.jpg",
+            description: "現在19歳の彼はロングボードだけではなく、ショートボード、SUPの三刀流。どの分野でも秀でた才能を持ち、波に乗ることに対しての柔軟な考えは日本一、いや世界でも有数だろう。簡単に彼のプロフィールを紹介すると2000年11月に宮崎県川南町に生まれ、2008年に同県の日南市伊比井に引っ越し、2012年に自宅近くの伊比井浜で拾ったボディーボードをきっかけに波に乗ることにのめり込んだ"
+          },
+          {
+            name: "Phil Rajzman",
+            img:"https://i.ytimg.com/vi/TR-AAd4-Fsc/maxresdefault.jpg",
+            description: "菲爾·拉茲曼（Phil Rajzman）是巴西職業衝浪運動員，曾兩次獲得世界衝浪聯盟世界冠軍。作為巴西沖浪運動先驅者之一的里科·德·索薩（Rico de Souza）的弟子，拉茲曼（Rajzman）在六歲時便開始風行一時，並被公認為巴西沖浪的神童。"
+          },
+          {
+            name: "Edouard Delpero",
+            img: "https://cdn-s-www.ledauphine.com/images/CC71CB95-AB7F-4170-AB16-08528470DF3E/MF_contenu/edouard-delpero-remporte-son-4e-titre-europeen-1567432912.jpg",
+            description: "愛德華·德爾佩羅（Edouard Delpero）是法國職業衝浪運動員，1990年2月26日出生於馬賽。自由衝浪者和競賽衝浪者。長板：2008年：法國青少年冠軍（- 18歲）/歐洲青少年冠軍（-18歲）2011、2012、2013年：法國冠軍 2012年：世界巡迴賽長板WSL第5名 2013年：世界冠軍ISA長板隊（ 個人第5名） 2014年：歐洲冠軍WSL（世界衝浪聯盟） 2015年：歐洲冠軍WSL"
+          }
+        ]
+
+        card(surferInfo[0].name, surferInfo[0].img, surferInfo[0].description)
+
+        for (let i = 0; i < surfers.length; i++) {
+          record(surfers[i])
+        }
+
+        clearVideoList();
+        search(searchTerm);
+
+        $("#searchForm").on("submit", (e) => {
+          e.preventDefault();
+          searchTerm = $("#searchField").val();
+          search(searchTerm);
+        });
+
+        $('#recordList').on("click", "#recordItem", function () {
+          $('#surfer-info').find(".surfer-info-content").remove();
+          let name = $(this).text();
+          search(name)
+          surferInfo.forEach(surfer => {
+            if( surfer.name === name ) {
+              console.log(surfer.name, surfer.img, surfer.description)
+              card(surfer.name, surfer.img, surfer.description)
+            }
+          })
+        });
+
+        function search(q) {
+          $.ajax({
+            method: "GET",
+            url: "https://www.googleapis.com/youtube/v3/search",
+            data: {
+              key: apiKey,
+              q: q,
+              part: "snippet",
+              maxResults: 6,
+              type: "video",
+              videoEmbeddable: true,
+            }
+          }).done((data) => {
+            let videos = data.items;
+            clearVideoList();
+            videos.forEach((el) => {
+              //add channelTitle
+              // add video id to li element
+              videoList.append(`<li class="media mb-2" id="${el.id.videoId}">
+                  <img src="${el.snippet.thumbnails.medium.url}" class="mr-3 ml-2">
+                  <div class="media-body">
+                    <h5 class="mt-0 mb-1">${el.snippet.title}</h5>
+                    <h6 class="my-1 text-info">${el.snippet.channelTitle}</h6>
+                    <p class="mb-0">${el.snippet.description}</p>
+                  </div>
+                </li>`);
+            });
+
+            //By default, the first video of the search result will be played
+            //display the title, the description and the channel name
+            let video = data.items[0];
+            play(video.id.videoId, video.snippet.title,
+              video.snippet.description, video.snippet.channelTitle);
+
+          }).fail(function (data) {
+            console.log(data);
+          });
+        }
+
+        function clearVideoList() {
+          videoList.find(".media").remove();
+        }
+
+        function play(id, title, description, channelTitle) {
+          player.attr("src", `https://www.youtube.com/embed/${id}?enablejsapi=1`);
+          $("#video-title").text(title);
+          $("#video-description").text(description);
+          $("#video-channelTitle").text(channelTitle);
+        }
+
+        //select the video
+        videoList.on("click", "li", function () {
+          let id = $(this).attr("id");
+          findVideoById(id);
+        });
+
+        //find video by id
+        function findVideoById(id) {
+          $.ajax({
+            method: "GET",
+            url: "https://www.googleapis.com/youtube/v3/videos",
+            data: {
+              key: apiKey,
+              id: id,
+              part: "snippet",
+
+            }
+          }).done((data) => {
+            let video = data.items[0];
+            let snippet = video.snippet;
+            play(id, snippet.title, snippet.description, snippet.channelTitle)
+
+          }).fail((data) => {
+            console.log(data);
+          });
+
+        }
+
+        function record(item) {
+          $('#recordList').append(`<div class="my-2">
+          <button id="recordItem" class="btn btn-outline-primary">${item}</button>
+        </div>`)
+        }
+
+        function card(name, image, description) {
+          $('#surfer-info').append(
+          `<div class="surfer-info-content"><img src="${image}" class="card-img-top img-fluid" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">${name}</h5>
+                <p class="card-text">${description}</p>
+              </div>
+            </div>`
+          )
+        }
+
+      });
+  </script>
+  {{{ body }}}
 </body>
 </html>

@@ -1,1 +1,48 @@
-<h3>hello</h3>
+<link rel="stylesheet" href="/stylesheets/style.css">
+
+<nav class="navbar navbar-dark bg-danger">
+  <a class="navbar-brand" href="#">Surfing videos</a>
+</nav>
+<div class="container">
+  <div class="row">
+    <!-- Search forms -->
+    <form id="searchForm" class="col-lg-12">
+      <div class="input-group py-4">
+        <input type="text" class="form-control" id="searchField">
+        <div class="input-group-prepend">
+          <button type="submit" class="btn btn-danger">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="container-fluid mb-4">
+
+  <div class="row d-flex justify-content-center">
+    <div class="col-auto mb-3" id="recordList">
+      <h3>Surfers: </h3>
+    </div>
+    <!-- Let's make it responsive -->
+    <div class="col-12 col-lg-6 mb-4 ml-5">
+      <div id="surfer-info" class="card mb-3" style="width: 49.5 rem;">
+      </div>
+
+      <!-- iframe -->
+      <div class="card w-100">
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe id="player" class="embed-responsive-item" src="" frameborder="0"></iframe>
+        </div>
+        <div class="card-body">
+          <h5 id="video-title" class="card-title">Video title</h5>
+          <h6 id="video-channelTitle" class="text-info">Channel name</h6>
+          <p id="video-description" class="card-text">Video description</p>
+        </div>
+      </div>
+    </div>
+    <!-- video list -->
+    <div class="col-12 col-lg-4 ml-3">
+      <ul class="list-unstyled" id="videoList"></ul>
+    </div>
+  </div>
+</div>
